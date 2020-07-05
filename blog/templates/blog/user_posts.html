@@ -1,0 +1,96 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h3 class="pb-4 mb-4 font-italic border-bottom">
+Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})
+</h3>
+
+{% for post in posts %}
+<div class="blog-post card post-card container py-5">
+    <div class="row justify-content-center">
+        <div class="col-1">
+            <img src="{{ post.author.profile.image.url }}" alt="image" class="profile-picture">
+        </div>
+        <div class="col-11">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-10">
+                        <a href="{% url 'user-posts' post.author.username %}" class="card-link text-dark font-weight-bolder">
+                            {{post.author}}
+                        </a>
+                        <p class="blog-post-meta text-muted">
+                            {% if post.date_posted == post.date_updated %}
+                                {{post.date_updated|date:"D jS M, Y \a\t H:i"}}
+                            {% else %}
+                                (Updated){{post.date_updated|date:"D jS M, Y \a\t H:i"}}
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-1 mr-1">
+                        <button role="checkbox" id="save-btn" class="article-save-btn btn" data-category="save"
+                            alt="save" title="save">
+                            <i class="far fa-bookmark"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h2 class="blog-post-title">
+                            <span class="post-type text-white bg-dark">{{post.type}}</span>
+                            <a href="{% url 'post-detail' post.id %}" class="post-linke card-link text-white bg-dark">{{post.title}}</a>
+                        </h2>
+                        <p class="post-description text-dark">
+                            {{post.description}}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <a href="#" class="btn react-btn">
+                            <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865zM6.431 7.037a3.375 3.375 0 000 4.773L12 17.38l5.569-5.569a3.375 3.375 0 10-4.773-4.773L9.613 10.22l-1.06-1.062 2.371-2.372a3.375 3.375 0 00-4.492.25v.001z">
+                                </path>
+                            </svg>
+                            <span class="pl-2" id="num-of-react">23</span> reactions
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="#" class="btn react-btn">
+                            <svg class="crayons-icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6zM12 15.5h1.5a4.501 4.501 0 001.722-8.657A4.5 4.5 0 0013.5 6.5h-3A4.5 4.5 0 006 11c0 2.707 1.846 4.475 6 6.36V15.5z">
+                                </path>
+                            </svg>
+                            <span class="pl-2" id="num-of-comments">23</span> comment
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.blog-post -->
+{% endfor %}
+
+{% if is_paginated %}
+        <nav class="blog-pagination">
+    {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <a class="btn btn-info mb-4" href="?page={{ num }}">{{num}}</a>
+        {% elif num > page_obj.number|add:'-4' and num < page_obj.number|add:'4' %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{num}}</a>
+        {% endif %}
+    {% endfor %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.page_number }}">Last</a>
+    {% endif %} 
+        </nav>
+{% endif %}
+
+
+{% endblock content %} 

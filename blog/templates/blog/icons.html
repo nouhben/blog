@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icons</title>
+    <script src="https://kit.fontawesome.com/9008b041c7.js" crossorigin="anonymous"></script>
+    <style>
+        ul {
+            list-style: none;
+        }
+
+        .icon {
+            width: 80px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            background-color: white;
+            margin: 1rem;
+            cursor: pointer;
+            transition: all .1s ease-in;
+        }
+
+        .icon-list {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .clicked {
+            border-bottom: 1px solid #ce93d8;
+            box-shadow: 0 1px 0 0 #ce93d8;
+        }
+
+        .counter {
+            position: relative;
+            font-size: 7px;
+            font-weight: 300;
+            display: block;
+            width: 8px;
+            margin-left: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul class="icon-list">
+            <li class="icon">
+                <span class="counter">22</span>
+                <div class="icon-wrapper">
+                    <img src="../../static/blog/images/love-shapes-svgrepo-com (1).svg" alt="" class="icon-img">
+                </div>
+            </li>
+            <li class="icon">
+                <span class="counter">22</span>
+                <div class="icon-wrapper">
+                    <img src="../../static/blog/images/windmill-svgrepo-com2.svg" alt="" class="icon-img">
+                </div>
+            </li>
+            <li class="icon">
+                <span class="counter">22</span>
+                <div class="icon-wrapper">
+                    <img src="../../static/blog/images/thumbs-up-like-svgrepo-com.svg" alt="" class="icon-img">
+                </div>
+            </li>
+            <li class="icon">
+                <span class="counter">22</span>
+                <div class="icon-wrapper">
+                    <img src="../../static/blog/images/unicorn-svgrepo-com.svg" alt="" class="icon-img">
+                </div>
+            </li>
+            <li class="icon">
+                <span class="counter">22</span>
+                <div class="icon-wrapper">
+                    <img src="../../static/blog/images/thumb-down-dislike-svgrepo-com.svg" alt="" class="icon-img">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <section class="icon-list">
+            <button role="checkbox" id="reaction-butt-love" class="article-reaction-butt like-reaction-button icon"
+                data-category="heart" alt="heart" title="heart">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/heart-love.svg" alt="" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-windmil" class="article-reaction-butt like-reaction-button icon"
+                data-category="like" alt="windmil" title="windmil">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/windmil.svg" alt="windmil" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-like" class="article-reaction-butt like-reaction-button icon"
+                data-category="like" alt="like" title="thumbsup">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/thumbsup.svg" alt="" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-dislike" class="article-reaction-butt like-reaction-button icon"
+                data-category="dislike" alt="thumbsdown title=" thumbsdown">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/thumbsdown.svg" alt="thumbsdown" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-unicorn" class="article-reaction-butt like-reaction-button icon"
+                data-category="unicorn" alt="unicorn" title="unicorn">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/unicorn.svg" alt="heart" class="icon-img">
+            </button>
+
+        </section>
+    </div>
+
+    <script>
+        const icons = document.getElementsByClassName('icon-img');
+        const counters = document.getElementsByClassName('counter');
+        for (let index = 0; index < icons.length; index++) {
+            const element = icons[index];
+            element.addEventListener('click', function () {
+                //overlays[index].classList.toggle('show');
+                if (element.classList.contains('activated')) {
+                    //substract the number of likes
+                    const num = Number(counters[index].innerHTML);
+                    counters[index].innerHTML = num - 1;
+                    //remove the class
+                    element.classList.remove('clicked');
+                } else {
+                    //increment the number of likes
+                    const num = Number(counters[index].innerHTML);
+                    counters[index].innerHTML = num + 1;
+                    //remove the class
+                    element.classList.add('activated');
+                    //make ajax calls to update the DB
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

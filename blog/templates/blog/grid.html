@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title>
+    <style>
+        *,
+        *:after,
+        *:before {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 17px;
+            font-weight: 500;
+            text-align: center;
+            color: #FFF;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(120px, auto);
+            grid-gap: 10px;
+            max-width: 880px;
+            border: solid 5px rgba(119, 44, 44, 0.658);
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .container>* {
+            background-color: #7c4dff;
+            padding: 25px;
+        }
+
+        header {
+            grid-column: 1 / 13;
+        }
+
+        main {
+            grid-column: 3 / 13;
+            /* give it height **/
+            grid-row: 2 / 4;
+        }
+
+        section {
+            grid-column: 1 / 13;
+            grid-row: 4 / 6;
+        }
+
+        aside {
+            grid-column: 1 / 3;
+            grid-row: 2 / 3;
+        }
+
+        nav {
+            grid-column: 1 / 3;
+            grid-row: 3 / 4;
+        }
+
+        footer {
+            grid-column: 1/13;
+        }
+
+        .grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-auto-rows: minmax(100%, auto);
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            padding: 0;
+        }
+
+        .grid p {
+            background-color: rgba(0, 0, 0, 0.205);
+            border: solid 1px;
+            margin: 0;
+        }
+
+        .active .grid {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" class="input" name="show" id="show-grid"
+        onchange="document.getElementById('container').classList.toggle('active');">
+
+    <div class="container" id="container">
+        <div class="grid">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+        </div>
+        <header>HEADER</header>
+        <main>MAIN</main>
+        <section>SECTION</section>
+        <aside>ASIDE</aside>
+        <nav>NAVIGATION</nav>
+        <footer>FOOTER</footer>
+    </div>
+</body>
+
+</html>

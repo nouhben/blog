@@ -1,0 +1,40 @@
+{% block post_details %}
+<div class="blog-post">
+    <h2 class="blog-post-title">{{post.title}}</h2>
+    <p class="blog-post-meta">{{post.date_posted|date:"D jS M, Y \a\t H:i:s"}} by <a href="#">{{post.author}}</a></p>
+
+    <p>{{post.content}}</p>
+    <hr>
+    <p>{{post.content}}</p>
+
+    <div class="reactions">
+        <section class="icon-list">
+            <button role="checkbox" id="reaction-butt-love" class="article-reaction-butt like-reaction-button icon"
+                data-category="heart" alt="heart" title="heart">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/heart-love.svg" alt="" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-windmil" class="article-reaction-butt like-reaction-button icon"
+                data-category="like" alt="windmil" title="windmil">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/windmil.svg" alt="windmil" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-like" class="article-reaction-butt like-reaction-button icon"
+                data-category="like" alt="like" title="thumbsup">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/thumbsup.svg" alt="" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-dislike" class="article-reaction-butt like-reaction-button icon"
+                data-category="dislike" alt="thumbsdown title=" thumbsdown">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/thumbsdown.svg" alt="thumbsdown" class="icon-img">
+            </button>
+            <button role="checkbox" id="reaction-butt-unicorn" class="article-reaction-butt like-reaction-button icon"
+                data-category="unicorn" alt="unicorn" title="unicorn">
+                <span class="counter">22</span>
+                <img src="../../static/blog/images/optimizedICONS/unicorn.svg" alt="heart" class="icon-img">
+            </button>
+        </section>
+    </div>
+</div><!-- /.blog-post -->
+{% endblock post_details %}

@@ -1,0 +1,135 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.active-pink-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-pink input[type=text] {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+.active-pink .fa,
+.active-pink-2 .fa {
+    color: #f48fb1;
+}
+
+.sidebar {
+    position: sticky;
+    right: 0;
+    top: 10%;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0 1px 0 0 #f48fb1;
+    height: fit-content;
+}
+
+/* search box */
+.active-purple-2 input.form-control[type=text]:focus:not([readonly]) {
+    border: none;
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple input.form-control[type=text] {
+    border: none;
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple-2 input[type=text]:focus:not([readonly]) {
+    border: none;
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple input[type=text] {
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+}
+
+.active-purple .fas,
+.active-purple-2 .fas {
+    color: #ce93d8;
+}
+
+/***** ICONS STYLES *****/
+ul {
+    list-style: none;
+}
+
+.icon {
+    width: 50px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    background-color: white;
+    margin: 0 1rem 1rem 1rem;
+    cursor: pointer;
+    transition: all .1s ease-in;
+}
+
+.icon-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activated {
+    outline: none;
+    border-bottom: 1px solid #ce93d8;
+    box-shadow: 0 1px 0 0 #ce93d8;
+    overflow: hidden;
+}
+
+.counter {
+    position: relative;
+    font-size: 7px;
+    font-weight: 300;
+    display: block;
+    width: 8px;
+    margin-left: auto;
+}
+
+/**** POST ****/
+.blog-post {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.reactions {
+    z-index: 100;
+    border-top: #ce93d8 1px solid;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .53);
+    background-color: white;
+    border-radius: 5px;
+}
+
+.profile-picture {
+    width: 2.3em;
+    border: solid white 1px;
+    box-shadow: 0 1px 0 0 #ce93d8;
+    border-radius: 50%;
+    margin-right: -5px;
+}

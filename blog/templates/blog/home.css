@@ -1,0 +1,285 @@
+*,
+*:after,
+*:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+:root {
+    font-size: 14px !important;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navigation-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: white;
+    z-index: 1000;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .53);
+}
+
+
+#seacrh:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+#search {
+    border: none;
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+    display: none;
+}
+
+.nav-brand {
+    font-size: 1.335rem;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    margin: 0 1rem;
+}
+
+.nav-brand .home {
+    color: white;
+    background: rgba(0, 0, 0, 0.849);
+    padding: 7px;
+    border-radius: 6px;
+}
+
+
+.menu {
+    cursor: pointer;
+    display: block;
+    z-index: 2020;
+    height: 30px;
+    width: 30px;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+}
+
+.line,
+.line::after,
+.line::before {
+    position: absolute;
+    background-color: #191919;
+    width: 100%;
+    height: 3.5px;
+    content: '';
+    top: 50%;
+    left: 0;
+    transition: transform ease .3s;
+}
+
+.line {
+    margin-top: -2px;
+}
+
+.line:before {
+    top: -.75rem
+}
+
+.line::after {
+    top: .75rem;
+}
+
+.line::after,
+.line::before {
+    transform: rotate(0deg);
+}
+
+/*** when we have the active state: the header or a container that needs to be shown is active ***/
+.active .line::after {
+    display: none;
+}
+
+.active .line {
+    background-color: rgba(228, 222, 222, 0.774);
+    transform: rotate(-45deg);
+}
+
+.active .line::before {
+    transform: rotate(90deg);
+    top: 0;
+    background-color: rgba(228, 222, 222, 0.774);
+}
+
+.active .menu-content {
+    display: block;
+    transform: translateY(100vh);
+    height: 100vh;
+    /* add  a transition animation when showing the menu */
+    transition: all ease-in .3s;
+}
+
+.menu-content {
+    width: 100vw;
+    position: absolute;
+    top: -100vh;
+    z-index: 1010;
+    background-color: rgba(12, 12, 12, 0.945);
+    display: none;
+}
+
+.menu-content-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "navigation"
+        "content"
+        "foot";
+    grid-auto-rows: min-content;
+    grid-template-rows: auto;
+}
+
+.navigation-head {
+    grid-area: header;
+}
+
+nav {
+    grid-area: navigation;
+    background: white;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, .53);
+    border-top: 5px;
+    width: 100%;
+
+}
+
+.active nav {
+    z-index: 0;
+}
+
+.nav-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+main {
+    margin: 10rem 1rem;
+    grid-area: content;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-flow: row;
+    gap: 1rem;
+}
+
+.link {
+    text-transform: uppercase;
+    margin: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #d4d1d1;
+    outline: none;
+    transition: all ease .2s;
+}
+
+.link:hover,
+.nav-link:hover {
+    color: #d4d1d1c0;
+}
+
+.nav-link {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #d4d1d1;
+    outline: none;
+    transition: all ease .2s;
+}
+
+.nav-link:focus,
+.nav-link:active,
+.active-link {
+    text-decoration: underline #f48fb1;
+    color: #191919;
+}
+
+.content {
+    width: 350px;
+    height: 150px;
+    border: solid #f48fb1 1px;
+    box-shadow: 0 1px 0 0 #f48fb1;
+    margin: auto;
+    background-color: #d4d1d1;
+}
+
+footer {
+    bottom: 0;
+    width: 100vw;
+}
+
+@media screen and (min-width:700px) {
+    #search {
+        display: none;
+    }
+
+    body {
+        display: grid;
+        grid-template-areas:
+            "header header header"
+            "navigation navigation navigation"
+            "content content content"
+            "foot foot foot";
+        gap: 5px;
+    }
+
+
+    .navigation-head {
+        grid-area: header;
+    }
+
+    nav {
+        line-height: 3rem;
+        margin-top: 4.3rem;
+        grid-area: navigation;
+        position: fixed;
+        top: 0;
+    }
+
+    .nav-list {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    main {
+        margin: 0;
+        grid-area: content;
+        overflow: hidden;
+    }
+
+
+    footer {
+        width: 100vw;
+        height: 50px;
+        text-align: center;
+        margin: auto 3rem;
+        background-color: #d4d1d1c0;
+        grid-area: foot;
+    }
+}
