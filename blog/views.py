@@ -70,7 +70,7 @@ class UserPostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["posts_updated"] = self.posts_updated
+        context["pu"] = self.posts_updated
         return context
 
 class PostDetail:
@@ -82,6 +82,21 @@ class PostDetail:
 from django.views.generic import DetailView
 class PostDetailView(DetailView):
     model = Post
+    reacts = 0
+    comments = 0
+    def get_queryset(self):
+        qs = super().get_queryset()
+        post = qs.filter(pk=self.kwargs.get('pk')).first()
+        self.comments = post.comment_set.all().count()
+        self.reacts = post.reaction_set.all().count()
+        return qs
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["reacts"] = self.reacts
+        context["comments"] = self.comments
+        return context
+    
+    
     # with this view we used everything by default 
     # temlate name and object as post
 

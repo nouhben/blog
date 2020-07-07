@@ -1,4 +1,5 @@
 {% extends 'blog/base.html' %}
+{% load my_tags %}
 {% block content %}
 <h3 class="pb-4 mb-4 font-italic border-bottom">
 Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})
@@ -52,12 +53,7 @@ Posts by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})
                                 </path>
                             </svg>
                             <span class="pl-2" id="num-of-react">
-                                
-                                {% for pu in posts_updated %}
-                                    {% if pu.post.id == post.id %}
-                                        {{ pu.reacts }}
-                                    {% endif %}
-                                {% endfor %}
+                                {{forloop.counter0 }}
                             </span> reactions
                         </a>
                     </div>
