@@ -54,13 +54,30 @@ class UserPostListView(ListView):
     model = Post
     template_name = 'blog/user_posts.html'
     context_object_name = 'posts'
+    posts_updated = []
 
     def get_queryset(self):
         user = get_object_or_404(User, username= self.kwargs.get('username'))
         posts = Post.objects.filter(author=user)
+        for p in posts:
+            pd = PostDetail(
+                p,
+                p.comment_set.all().count(),
+                p.reaction_set.all().count()
+            )
+            self.posts_updated.append(pd)
         return posts#.order_by('date_posted')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["posts_updated"] = self.posts_updated
+        return context
 
+class PostDetail:
+    def __init__(self,post,reacts,comments):
+        self.post = post
+        self.reacts = reacts
+        self.comments = comments  
 # For each post individualy it is a detail view
 from django.views.generic import DetailView
 class PostDetailView(DetailView):
