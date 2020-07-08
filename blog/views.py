@@ -82,13 +82,17 @@ class PostDetail:
 from django.views.generic import DetailView
 class PostDetailView(DetailView):
     model = Post
-    reacts = 0
-    comments = 0
+    reacts = {}
+    comments = {}
     def get_queryset(self):
         qs = super().get_queryset()
         post = qs.filter(pk=self.kwargs.get('pk')).first()
-        self.comments = post.comment_set.all().count()
-        self.reacts = post.reaction_set.all().count()
+        c = post.comment_set.all()
+        self.comments['com'] = c
+        self.comments['c_count'] = c.count
+        r = post.reaction_set.all()
+        self.reacts['reac'] = r
+        self.reacts['r_count'] = r.count()
         return qs
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
