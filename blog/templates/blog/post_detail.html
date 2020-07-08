@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
 <div class="blog-post card post-card container py-5">
     <div class="row justify-content-center">
         <div class="col-1">
@@ -79,57 +80,56 @@
                     <div class="col">
                         <form method="POST" novalidate class="px-2 py-2">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">
-                                    <h2 class="font-bold">Discussion</h2>
-                                </label>
-                                <textarea class="form-control border-bottom" id="exampleFormControlTextarea1"
-                                    rows="4"></textarea>
-                            </div>
-                            <div class="container">
-                                <div class="row justify-content-between ">
-                                    <div class="col-3 form-group text-left">
-                                        <input type="file" class="form-control-file" id="file-input">
-                                    </div>
-                                    <div class="col-3 form-group text-right">
-                                        <button class="btn btn-sm btn-outline-primary" type="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                            {{form|crispy}}
 
-                {% for comment in comments.com %}
-                <div class="row card my-3">
-                    <div class="col">
-                        <div class="container-fluid">
-                            <div class="row justify-content-between pt-4">
-                                <div class="col-4">
-                                    <img src="{{ comments.com.0.comment_author.profile.image.url }}" width="40px"
-                                        class="img-thumbnail border-dark rounded-circle account-img">
-                                    <h3 class="text-dark d-inline py-4">
-                                        {{comment.comment_author.username}}
-                                    </h3>
-                                </div>
-                                <div class="col-3">
-                                    <p class="text-muted">
-                                        {{comment.date_commented|date:"D jS M, Y \a\t H:i"}}
-                                    </p>
+                            <div class="container px-0 mx-0">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-lg btn-outline-primary" type="submit">Submit</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row py-5">
-                                <div class="col">
-                                    {{comment.comment_content}}
+                    </div>
+                    </form>
+                </div>
+            </div>
+
+            {% for comment in comments.com %}
+            <div class="row card my-3">
+                <div class="col">
+                    <div class="container-fluid">
+                        <div class="row justify-content-between pt-4">
+                            <div class="col-4">
+                                <img src="{{ comment.comment_author.profile.image.url }}" width="40px"
+                                    class="img-thumbnail border-dark rounded-circle account-img">
+                                <h3 class="text-dark d-inline py-4">
+                                    {{comment.comment_author.username}}
+                                </h3>
+                            </div>
+                            <div class="col-3">
+                                <p class="text-muted">
+                                    {{comment.date_commented|date:"D jS M, Y \a\t H:i"}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row py-5">
+                            <div class="col text-center">
+                                {{comment.comment_content}}
+                                {% if comment.comment_image %}
+                                <div class="comment-img">
+                                    <img src="{{ comment.comment_image.url }}"
+                                        class="img-thumbnail rounded comment-img">
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
+</div>
 
 </div><!-- /.blog-post -->
 {% endblock content %}

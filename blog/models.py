@@ -18,17 +18,24 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("post-detail", kwargs={"pk": self.pk})
 
-
+from PIL import Image
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     comment_author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_commented = models.DateTimeField(default=timezone.now)
     comment_content = models.TextField(null=False, blank=False)
+    comment_image = models.ImageField(null=True, upload_to='comment_pics')
     has_reply = models.BooleanField(default=False)
     #reply_to = models.ForeignKey(Comment, null=True, on_delete=models.CASCADE)
-
     def __str__(self):
         return f'{self.comment_author} commented this on post by {self.post.author}'
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.comment_image.path)
+        if img.height > 250 or img.width > 250:
+            output_size = (250,250)
+            img.thumbnail(output_size)
+            img.save(self.comment_image.path)
     
 class Reply(models.Model):
     #post = models.ForeignKey(Post, on_delete=models.CASCADE)

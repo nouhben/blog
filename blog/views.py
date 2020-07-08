@@ -80,6 +80,7 @@ class PostDetail:
         self.comments = comments  
 # For each post individualy it is a detail view
 from django.views.generic import DetailView
+from blog.forms import CommentCreationForm
 class PostDetailView(DetailView):
     model = Post
     reacts = {}
@@ -98,6 +99,7 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["reacts"] = self.reacts
         context["comments"] = self.comments
+        context['form'] = CommentCreationForm()
         return context
     
     
