@@ -10,9 +10,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',include('blog.urls')),
     #path('blog/',include('blog.urls')),
-        #add the users management pathes later we can add the to users urls.py
+    #add the users management pathes later we can add the to users urls.py
     path('register/', user_views.register, name='user-register'),
-        #login and logout vies
+    #login and logout viwes
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     #path('login/', user_views.MyLoginView.as_view(template_name='users/login.html'), name='login'),
     #path('login/', user_views.MyLoginView.as_view(), name='login'),
