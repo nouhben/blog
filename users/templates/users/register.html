@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
+{% comment %}
 {% load crispy_forms_tags %}
-{% block content %}
 <div class="container card">
-    <form method="POST" novalidate class="px-2">
+    <form method="POST" class="px-2">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4 p-3">Join Today!</legend>
-            {{ form|crispy }}
+            {{ form}}
         </fieldset>
         <div class="form-group">
             <button class="btn btn-lg btn-outline-primary mx-auto" type="submit">Sign Up</button>
@@ -17,4 +17,32 @@
     </div>
 
 </div>
+{% endcomment %}
+{% load widget_tweaks %}
+{% block content %}
+
+    <form method="POST" class="px-2">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4 p-3">Join Today!</legend>
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+        </fieldset>
+        {% for field in form.visible_fields %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field|add_class:'form-control' }}
+        {% for error in field.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+    {% endfor %}
+        <div class="form-group mt-5">
+            <button class="btn btn-lg btn-outline-primary mx-auto" type="submit">Sign Up</button>
+        </div>
+    </form>
+    <div class="border-top p-3">
+        <small class="text-muted">Already Have An Account? <a href="{% url 'login' %}" class="ml-2">Sign In</a></small>
+    </div>
 {% endblock content %}

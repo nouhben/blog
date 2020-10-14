@@ -5,7 +5,7 @@ from .models import Profile
 class UserRegisterFrom(UserCreationForm):
     email = forms.EmailField(
         max_length=254,
-        widget=forms.EmailInput(attrs={'class':'form-control p-2 mx-5'})
+        widget=forms.EmailInput(attrs={'class':'form-control'})
     )
     # To add classes to the rendred html but it is bad to do it here bcz it is 
     # somthing that should be done on the template not on the server ==> frontend

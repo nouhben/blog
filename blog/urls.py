@@ -3,8 +3,8 @@ from . import views
 #to test the class based views
 from .views import PostListView, PostDetailView, PostCreatView, PostUpdateView, PostDeleteView, UserPostListView
 urlpatterns = [
-    #path('',views.home, name="blog-home"),
-    path('', PostListView.as_view(), name='blog-home'),
+    path('',views.home, name="blog-home"),
+    #path('', PostListView.as_view(), name='blog-home'),
     #route that takes us to specefic post
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     #path to update a post

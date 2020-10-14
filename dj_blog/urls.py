@@ -8,9 +8,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-     path('',include('AJAXCRUD.urls')),
-    #path('',include('blog.urls')),
-    #path('blog/',include('blog.urls')),
+     #path('',include('AJAXCRUD.urls')),
+    path('',include('blog.urls')),
+    path('blog/',include('blog.urls')),
     #add the users management pathes later we can add the to users urls.py
     path('register/', user_views.register, name='user-register'),
     #login and logout viwes
