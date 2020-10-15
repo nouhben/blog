@@ -1,4 +1,5 @@
 {% block post_details %}
+{% load static %}
 <div class="blog-post">
     <h2 class="blog-post-title">{{post.title}}</h2>
     <p class="blog-post-meta">{{post.date_posted|date:"D jS M, Y \a\t H:i:s"}} by <a href="#">{{post.author}}</a></p>

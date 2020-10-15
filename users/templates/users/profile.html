@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% comment%}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="content-section card">
@@ -21,4 +22,59 @@
         </div>
     </form>
 </div>
+{% endblock content %}
+{% endcomment%}
+
+{% load widget_tweaks %}
+{% block content %}
+<div class="media mx-auto d-flex mt-auto py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img class="rounded-circle account-img " width="160px" src="{{ user.profile.image.url }}" alt="">
+            </div>
+    <div class="col">
+        <div class="media-body">
+            <h2 class="account-heading"> {{ user.username }}</h2>
+            <p class="text-secondary"> {{ user.email }} </p>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+    <form method="POST" enctype="multipart/form-data" class="px-2">
+        {% csrf_token %}
+        <fieldset class="form-group">
+                {% for hidden in u_form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+        </fieldset>
+        {% for field in u_form.visible_fields %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field|add_class:'form-control' }}
+        {% for error in field.errors %}
+          <span class="help-block">{{ error }}</span>
+        {% endfor %}
+      </div>
+    {% endfor %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4 p-3"></legend>
+            {% for hidden in p_form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+    </fieldset>
+    {% for field in p_form.visible_fields %}
+  <div class="form-group">
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field|add_class:'form-control' }}
+    {% for error in field.errors %}
+      <span class="help-block">{{ error }}</span>
+    {% endfor %}
+  </div>
+{% endfor %}
+        <div class="form-group mt-5">
+            <button class="btn btn-lg btn-outline-success mx-auto" type="submit">Update</button>
+        </div>
+    </form>
 {% endblock content %}
